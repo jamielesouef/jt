@@ -47,11 +47,6 @@ extension JTTool {
       printResults(json: json, verbose: verbose)
     }
     
-    private func parseJSON(_ jsonString: String) throws -> [[String: Any]]? {
-      guard let data = jsonString.data(using: .utf8) else { return nil }
-      return try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
-    }
-    
     func printResults(json: [[String: Any]], verbose: Bool) {
       print("GitHub Search Results for \"\(searchTerm)".bold)
       print(String(repeating: "=", count: 40))

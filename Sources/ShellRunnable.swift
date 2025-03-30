@@ -11,6 +11,7 @@ protocol ShellRunnable {
   func run() throws
   func shell(_ args: [String]) throws -> String
   func printResults(json: [[String: Any]], verbose: Bool)
+  func parseJSON(_ jsonString: String) throws -> [[String: Any]]?
 }
 
 extension ShellRunnable {
@@ -27,5 +28,10 @@ extension ShellRunnable {
     
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     return String(data: data, encoding: .utf8) ?? ""
+  }
+  
+  func parseJSON(_ jsonString: String) throws -> [[String: Any]]? {
+    guard let data = jsonString.data(using: .utf8) else { return nil }
+    return try JSONSerialization.jsonObject(with: data) as? [[String: Any]]
   }
 }
