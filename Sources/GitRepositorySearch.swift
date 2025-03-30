@@ -11,7 +11,7 @@ import Rainbow
 
 extension JTTool {
   
-  struct Search: ParsableCommand, ShellRunnable {
+  struct GitRepositorySearch: ParsableCommand, ShellRunnable {
     static let configuration = CommandConfiguration(
       commandName: "g",
       abstract: "Search GitHub repositories"

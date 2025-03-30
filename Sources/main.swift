@@ -8,7 +8,7 @@ struct JTTool: ParsableCommand {
   static let configuration = CommandConfiguration(
     commandName: "jt",
     abstract: "A powerful GitHub repository search tool",
-    subcommands: [Search.self],
-    defaultSubcommand: Search.self
+    subcommands: [GitRepositorySearch.self],
+    defaultSubcommand: GitRepositorySearch.self
   )
 }
