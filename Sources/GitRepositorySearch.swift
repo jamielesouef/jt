@@ -51,7 +51,7 @@ extension JTTool {
       print("GitHub Search Results for \"\(searchTerm)".bold)
       print(String(repeating: "=", count: 40))
       
-    
+      
       for repo in json {
         let name = repo["name"] as? String ?? "No name"
         let description = repo["description"] as? String ?? "No description"

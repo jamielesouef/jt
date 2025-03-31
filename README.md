@@ -1,52 +1,75 @@
-# jt
-A collection of helpers that speed up my day
+## 🛠️ Building & Dependencies
 
-## 🔍 GitHub Search (`jt g`)
-
-Search GitHub repositories directly from your terminal with enhanced formatting.
-
-## Usage
-
+### Prerequisites
 ```bash
-jt g -s <search_term> [options]
+# Install Xcode command line tools
+xcode-select --install
+
+# Install Homebrew (if missing)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-## Examples
-
+### Dependencies
 ```bash
-# Basic search
-jt g -s "SwiftUI"
+# Required tools
+brew install gh  # GitHub CLI
 
-# With options
-jt g -s "Python" --limit 5 --verbose
+# For development
+brew install swiftlint  # Optional linter
 ```
 
-## Options
+### Build & Install
+```bash
+# 1. Clone repository
+git clone https://github.com/jamielesouef/jt.git
+cd jt
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--search` | `-s` | **Required** Search term |
-| `--limit` | `-l` | Limit results (default: 30) |
-| `--verbose` | `-v` | Show full descriptions |
-| `--language` | `-L` | Filter by language (e.g. `-L swift`) |
+# 2. Build release binary
+swift build -c release
 
-## Output Format
-```text
-🔍 Results for "SwiftUI":
-───────────────────────────────
-🚀 Alamofire-SwiftUI
-   - URL: https://github.com/user/repo
-   - Description: SwiftUI wrapper for Alamofire
+# 3. Install globally
+cp .build/release/jt /usr/local/bin/
 
-🚀 Awesome-SwiftUI
-   - URL: https://github.com/curated/list
-   - Description: Curated SwiftUI resources
+# Verify installation
+jt --version
 ```
 
-## Tips
-- Use quotes for multi-word searches (`-s "machine learning"`)
-- Combine with `auth` for private repo access:
+### Development
+```bash
+# Run tests (requires Swift 5.10+)
+swift test
+
+# Debug build
+swift build
+
+# Update dependencies
+swift package update
+```
+
+### Dependency Graph
+```
+jt
+├── swift-argument-parser (Apple)
+├── Rainbow (onevcat)
+└── swift-testing (Apple, tests only)
+```
+
+### Troubleshooting
+- **Missing _TestingInternals**:
   ```bash
-  jt auth login
-  jt g -s "private-repo" --verbose
+  xcode-select -s /Applications/Xcode.app/Contents/Developer
   ```
+- **Authentication issues**:
+  ```bash
+  gh auth login --web
+  jt auth status
+  ```
+- **Clean rebuild**:
+  ```bash
+  rm -rf .build
+  swift package reset
+  ```
+
+---
+
+📦 **Repository**: [github.com/jamielesouef/jt](https://github.com/jamielesouef/jt)
