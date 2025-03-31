@@ -57,7 +57,7 @@ extension JTTool {
         let description = repo["description"] as? String ?? "No description"
         let url = repo["url"] as? String ?? "No URL"
         
-        print("\(name)".red.bold)
+        print("\(name)".cyan.bold)
         
         if verbose {
           print("Description: \(description)")

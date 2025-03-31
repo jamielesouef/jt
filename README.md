@@ -1,75 +1,52 @@
-## 🛠️ Building & Dependencies
+# jt
+A collection of helpers that speed up my day
 
-### Prerequisites
+## 🔍 GitHub Search (`jt g`)
+
+Search GitHub repositories directly from your terminal with enhanced formatting.
+
+## Usage
+
 ```bash
-# Install Xcode command line tools
-xcode-select --install
-
-# Install Homebrew (if missing)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+jt g -s <search_term> [options]
 ```
 
-### Dependencies
+## Examples
+
 ```bash
-# Required tools
-brew install gh  # GitHub CLI
+# Basic search
+jt g -s "SwiftUI"
 
-# For development
-brew install swiftlint  # Optional linter
+# With options
+jt g -s "Python" --limit 5 --verbose
 ```
 
-### Build & Install
-```bash
-# 1. Clone repository
-git clone https://github.com/jamielesouef/jt.git
-cd jt
+## Options
 
-# 2. Build release binary
-swift build -c release
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--search` | `-s` | **Required** Search term |
+| `--limit` | `-l` | Limit results (default: 30) |
+| `--verbose` | `-v` | Show full descriptions |
+| `--language` | `-L` | Filter by language (e.g. `-L swift`) |
 
-# 3. Install globally
-cp .build/release/jt /usr/local/bin/
+## Output Format
+```text
+🔍 Results for "SwiftUI":
+───────────────────────────────
+🚀 Alamofire-SwiftUI
+   - URL: https://github.com/user/repo
+   - Description: SwiftUI wrapper for Alamofire
 
-# Verify installation
-jt --version
+🚀 Awesome-SwiftUI
+   - URL: https://github.com/curated/list
+   - Description: Curated SwiftUI resources
 ```
 
-### Development
-```bash
-# Run tests (requires Swift 5.10+)
-swift test
-
-# Debug build
-swift build
-
-# Update dependencies
-swift package update
-```
-
-### Dependency Graph
-```
-jt
-├── swift-argument-parser (Apple)
-├── Rainbow (onevcat)
-└── swift-testing (Apple, tests only)
-```
-
-### Troubleshooting
-- **Missing _TestingInternals**:
+## Tips
+- Use quotes for multi-word searches (`-s "machine learning"`)
+- Combine with `auth` for private repo access:
   ```bash
-  xcode-select -s /Applications/Xcode.app/Contents/Developer
+  jt auth login
+  jt g -s "private-repo" --verbose
   ```
-- **Authentication issues**:
-  ```bash
-  gh auth login --web
-  jt auth status
-  ```
-- **Clean rebuild**:
-  ```bash
-  rm -rf .build
-  swift package reset
-  ```
-
----
-
-📦 **Repository**: [github.com/jamielesouef/jt](https://github.com/jamielesouef/jt)
