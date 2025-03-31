@@ -1,5 +1,3 @@
-// main.swift - No shebang line needed for SPM projects
-
 import Foundation
 import ArgumentParser
 
